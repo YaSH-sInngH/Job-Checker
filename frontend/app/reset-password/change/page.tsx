@@ -2,6 +2,7 @@
 import { useState } from 'react';
 import { useSearchParams } from 'next/navigation';
 import axios from 'axios';
+import { Suspense } from "react";
 
 export default function ChangePasswordPage() {
   const params = useSearchParams();
@@ -23,20 +24,22 @@ export default function ChangePasswordPage() {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="max-w-sm mx-auto mt-20 p-6 bg-white rounded shadow">
-      <h1 className="text-xl font-bold mb-4">Set New Password</h1>
-      <input
-        type="password"
-        placeholder="New password"
-        value={password}
-        onChange={e => setPassword(e.target.value)}
-        className="w-full mb-2 p-2 border rounded"
-        required
-      />
-      <button type="submit" className="w-full bg-blue-600 text-white p-2 rounded" disabled={loading}>
-        {loading ? 'Resetting...' : 'Reset Password'}
-      </button>
-      {msg && <div className="mt-2 text-center">{msg}</div>}
-    </form>
+    <Suspense fallback={<div>Loading...</div>}>
+      <form onSubmit={handleSubmit} className="max-w-sm mx-auto mt-20 p-6 bg-white rounded shadow">
+        <h1 className="text-xl font-bold mb-4">Set New Password</h1>
+        <input
+          type="password"
+          placeholder="New password"
+          value={password}
+          onChange={e => setPassword(e.target.value)}
+          className="w-full mb-2 p-2 border rounded"
+          required
+        />
+        <button type="submit" className="w-full bg-blue-600 text-white p-2 rounded" disabled={loading}>
+          {loading ? 'Resetting...' : 'Reset Password'}
+        </button>
+        {msg && <div className="mt-2 text-center">{msg}</div>}
+      </form>
+    </Suspense>
   );
 }
