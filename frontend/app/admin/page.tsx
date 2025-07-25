@@ -10,12 +10,36 @@ import Image from "next/image";
 
 const TABS = ["Overview", "Users", "Resumes"];
 
+type ResumeWithAnalysis = {
+  resume: {
+    id: number;
+    userId: number;
+    originalname: string;
+    filename?: string;
+    createdAt: string;
+    // ...other fields
+  };
+  analysis?: {
+    score?: number;
+    skills?: string;
+    // ...other fields
+  };
+};
+
+type User = {
+  id: number;
+  email: string;
+  username?: string;
+  role: string;
+  // ...other fields
+};
+
 export default function AdminDashboard() {
   const [accessToken, setAccessToken] = useState<string | null>(null);
   const [activeTab, setActiveTab] = useState("Overview");
   const [userSearch, setUserSearch] = useState("");
   const [modalSkills, setModalSkills] = useState<string[] | null>(null);
-  const [modalResume, setModalResume] = useState<any>(null);
+  const [modalResume, setModalResume] = useState<ResumeWithAnalysis | null>(null);
 
   useEffect(() => {
     setAccessToken(localStorage.getItem('access_token'));
@@ -50,7 +74,7 @@ export default function AdminDashboard() {
   const totalResumes = resumes?.length || 0;
   const avgScore = useMemo(() => {
     if (!resumes || resumes.length === 0) return 0;
-    const scores = resumes.map((item: any) => item.analysis?.score).filter((s: number) => typeof s === 'number');
+    const scores = resumes.map((item: ResumeWithAnalysis) => item.analysis?.score).filter((s: number) => typeof s === 'number');
     if (scores.length === 0) return 0;
     return Math.round(scores.reduce((a: number, b: number) => a + b, 0) / scores.length);
   }, [resumes]);
@@ -59,8 +83,11 @@ export default function AdminDashboard() {
   // Top scores for overview
   const topScores = useMemo(() => {
     if (!resumes) return [];
-    const sorted = [...resumes].filter((item: any) => item.analysis?.score)
-      .sort((a: any, b: any) => b.analysis.score - a.analysis.score)
+    const sorted = [...resumes].filter((item: ResumeWithAnalysis) => item.analysis?.score)
+      .sort(
+        (a: ResumeWithAnalysis, b: ResumeWithAnalysis) =>
+          (b.analysis?.score ?? 0) - (a.analysis?.score ?? 0)
+      )
       .slice(0, 5);
     return sorted;
   }, [resumes]);
@@ -68,13 +95,13 @@ export default function AdminDashboard() {
   // User lookup for overview
   const userMap = useMemo(() => {
     if (!users) return {};
-    const map: Record<number, any> = {};
-    users.forEach((u: any) => { map[u.id] = u; });
+    const map: Record<number, User> = {};
+    users.forEach((u: User) => { map[u.id] = u; });
     return map;
   }, [users]);
 
   // Filter users by search
-  const filteredUsers = users?.filter((user: any) =>
+  const filteredUsers = users?.filter((user: User) =>
     user.email.toLowerCase().includes(userSearch.toLowerCase()) ||
     user.username?.toLowerCase().includes(userSearch.toLowerCase())
   );
@@ -200,7 +227,7 @@ export default function AdminDashboard() {
                     </tr>
                   </thead>
                   <tbody>
-                    {topScores.map((item: any, index: number) => (
+                    {topScores.map((item: ResumeWithAnalysis, index: number) => (
                       <tr key={item.resume.id} className="border-b border-border/30 hover:bg-muted/30 transition-colors duration-200">
                         <td className="py-3 px-4">
                           <div className="flex items-center gap-3">
@@ -306,7 +333,7 @@ export default function AdminDashboard() {
                       </tr>
                     </thead>
                     <tbody>
-                      {filteredUsers?.map((user: any) => (
+                      {filteredUsers?.map((user: User) => (
                         <tr key={user.id} className="border-b border-border/30 hover:bg-muted/30 transition-colors duration-200">
                           <td className="py-3 px-4 text-white">{user.email}</td>
                           <td className="py-3 px-4 text-white">{user.username}</td>
@@ -364,7 +391,7 @@ export default function AdminDashboard() {
                       </tr>
                     </thead>
                     <tbody>
-                      {resumes?.map((item: any) => (
+                      {resumes?.map((item: ResumeWithAnalysis) => (
                         <tr key={item.resume.id} className="border-b border-border/30 hover:bg-muted/30 transition-colors duration-200">
                           <td className="py-3 px-4 text-white font-medium">
                             {userMap[item.resume.userId]?.username || userMap[item.resume.userId]?.email || 'User'}
