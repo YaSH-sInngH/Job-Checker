@@ -26,7 +26,8 @@ export default function LoginPage() {
     resolver: zodResolver(schema),
   });
 
-  const onSubmit = async (data: any) => {
+  type FormData = z.infer<typeof schema>;
+  const onSubmit = async (data: FormData) => {
     setLoading(true);
     try {
       const res = await axios.post('http://localhost:5000/auth/login', data, { withCredentials: true });
@@ -34,7 +35,8 @@ export default function LoginPage() {
       localStorage.setItem('access_token', accessToken);
       let role = 'user';
       try {
-        const decoded: any = jwtDecode(accessToken);
+        type JwtPayload = { role?: string };
+        const decoded: JwtPayload = jwtDecode(accessToken);
         role = decoded.role || 'user';
       } catch {}
       showToast('Login successful!', 'success');
@@ -44,8 +46,9 @@ export default function LoginPage() {
       } else {
         window.location.href = '/dashboard';
       }
-    } catch (err: any) {
-      showToast(err?.response?.data?.message || 'Login failed', 'error');
+    } catch (err) {
+      const error = err as { response?: { data?: { message?: string } } };
+      showToast(error?.response?.data?.message || 'Login failed', 'error');
     } finally {
       setLoading(false);
     }

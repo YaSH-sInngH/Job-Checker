@@ -153,7 +153,7 @@ export class ResumeService {
     return results;
   }
 
-  async getMatches(resumeId: number, topK = 5): Promise<Job[]> {
+  async getMatches(resumeId: number, topK = 15): Promise<Job[]> {
     // 1. Get the resume
     const resume = await this.resumeRepo.findOne({ where: { id: resumeId } });
     if (!resume) throw new NotFoundException('Resume not found');

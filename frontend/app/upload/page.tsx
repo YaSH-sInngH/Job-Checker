@@ -41,15 +41,6 @@ export default function UploadPage() {
     }
   }, [router]);
 
-  const dropzoneOptions: DropzoneOptions = {
-    onDrop,
-    accept: {
-      'application/pdf': ['.pdf'],
-      'application/vnd.openxmlformats-officedocument.wordprocessingml.document': ['.docx'],
-    },
-    multiple: false,
-    maxFiles: 1,
-  };
   const { getRootProps, getInputProps, isDragActive } = useDropzone({
     onDrop,
     accept: {
@@ -59,11 +50,11 @@ export default function UploadPage() {
     multiple: false,
     maxFiles: 1,
     // Do not pass HTML event props like onDragEnter, onDragOver, onDragLeave
-  } as any);
+  } as DropzoneOptions);
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-50 dark:bg-[#1a1f1b] px-4">
-      <Link href="/" className="absolute top-10 left-10 text-black dark:text-white underline-offset-4 hover:underline decoration-[#8854e0]">&#x2190; Back to Home</Link>
+      <Link href="/dashboard" className="absolute top-10 left-10 text-black dark:text-white underline-offset-4 hover:underline decoration-[#8854e0]">&#x2190; Back to Home</Link>
       <Card className="w-full max-w-lg mx-auto p-8 flex flex-col items-center gap-6">
         <h1 className="text-2xl font-bold mb-2 text-center text-gray-900 dark:text-white">Upload Your Resume</h1>
         <div

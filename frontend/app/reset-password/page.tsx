@@ -6,7 +6,6 @@ import Image from 'next/image';
 import { Input } from '@/components/ui/Input';
 import { Button } from '@/components/ui/Button';
 import { LoadingSpinner } from '@/components/ui/LoadingSpinner';
-import { div } from 'framer-motion/client';
 
 export default function ResetPasswordPage() {
   const params = useSearchParams();
@@ -18,7 +17,7 @@ export default function ResetPasswordPage() {
   const [loading, setLoading] = useState(false);
 
   // Request reset link
-  const handleRequest = async (e: any) => {
+  const handleRequest = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setLoading(true);
     try {
@@ -31,7 +30,7 @@ export default function ResetPasswordPage() {
   };
 
   // Set new password
-  const handleReset = async (e: any) => {
+  const handleReset = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setLoading(true);
     try {

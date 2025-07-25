@@ -36,8 +36,9 @@ export default function SignupPage() {
       await axios.post('http://localhost:5000/auth/signup', data, { withCredentials: true });
       showToast('Signup successful! Please log in.', 'success');
       window.location.href = '/login';
-    } catch (err: any) {
-      showToast(err?.response?.data?.message || 'Signup failed', 'error');
+    } catch (err) {
+      const error = err as { response?: { data?: { message?: string } } };
+      showToast(error?.response?.data?.message || 'Signup failed', 'error');
     } finally {
       setLoading(false);
     }

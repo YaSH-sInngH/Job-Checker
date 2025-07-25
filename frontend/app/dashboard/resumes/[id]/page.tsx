@@ -7,7 +7,14 @@ import { LoadingSpinner } from '@/components/ui/LoadingSpinner';
 import Link from "next/link";
 import { AIScore } from "@/components/ai/AIScore";
 import { SkillTags } from "@/components/ai/SkillTags";
-import { div } from "framer-motion/client";
+
+type Job = {
+  title?: string;
+  jobTitle?: string;
+  company?: string;
+  skills?: string;
+  description?: string;
+};
 
 export default function ResumeDetailPage() {
   const params = useParams();
@@ -70,7 +77,7 @@ export default function ResumeDetailPage() {
           </div>
           {analysis && analysis.skills && (
             <div className="flex flex-wrap gap-2 mb-4">
-              <SkillTags skills={analysis.skills.split(/,|\n/).map((s: any) => s.trim()).filter(Boolean)} />
+              <SkillTags skills={analysis.skills.split(/,|\n/).map((s: string) => s.trim()).filter(Boolean)} />
             </div>
           )}
           {analysis && (
@@ -105,7 +112,7 @@ export default function ResumeDetailPage() {
             <div className="flex items-center gap-2 text-primary-500"><LoadingSpinner size={20} /> Loading matches...</div>
           ) : matches && matches.length > 0 ? (
             <ul className="space-y-3">
-              {matches.map((job: any, i: number) => (
+              {matches.map((job: Job, i: number) => (
                 <li key={i} className="p-3 rounded-lg bg-[#8854e0]/20 dark:bg-[#8854e0]/30">
                   <div className="font-semibold text-white">{job.title || job.jobTitle || 'Job Match'}</div>
                   {job.company && <div className="text-base text-[#8854e0]">{job.company}</div>}
