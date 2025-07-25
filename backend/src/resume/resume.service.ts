@@ -12,6 +12,11 @@ import * as mammoth from 'mammoth';
 import axios from 'axios';
 import { ChromaClient } from 'chromadb';
 
+interface JobMetadata {
+  jobId: number;
+  title: string;
+}
+
 @Injectable()
 export class ResumeService {
   constructor(
@@ -148,7 +153,7 @@ export class ResumeService {
     return results;
   }
 
-  async getMatches(resumeId: number, topK = 5): Promise<any[]> {
+  async getMatches(resumeId: number, topK = 5): Promise<Job[]> {
     // 1. Get the resume
     const resume = await this.resumeRepo.findOne({ where: { id: resumeId } });
     if (!resume) throw new NotFoundException('Resume not found');
@@ -191,7 +196,11 @@ export class ResumeService {
     });
 
     // 4. Get job IDs from metadata
-    const jobIds = results.metadatas[0]?.map((meta: any) => meta.jobId) || [];
+    const jobIds = (results.metadatas[0] ?? [])
+      .filter((meta): meta is { jobId: number } =>
+        !!meta && typeof meta === 'object' && 'jobId' in meta && typeof (meta as any).jobId === 'number'
+      )
+      .map((meta) => meta.jobId);
     if (!jobIds.length) return [];
 
     // 5. Fetch full job details from the database
@@ -199,7 +208,7 @@ export class ResumeService {
 
     // 6. Optionally, sort jobs to match the order of jobIds
     const jobsMap = new Map(jobs.map(job => [job.id, job]));
-    return jobIds.map(id => jobsMap.get(id)).filter(Boolean);
+    return jobIds.map(id => jobsMap.get(id)).filter((job): job is Job => Boolean(job));
   }
 
   async getAllResumesWithAnalysis(): Promise<Array<{ resume: Resume; analysis: ResumeAnalysis | null }>> {

@@ -132,7 +132,7 @@ export default function AdminDashboard() {
               <Card className="group p-10 hover:scale-105 transition-all duration-300 cursor-pointer">
                 <div className="flex items-start justify-between mb-4">
                   <div className="p-3 rounded-xl transition-colors duration-300">
-                    <img src='./admin.png' alt="Users" className="w-12 h-12" />
+                    <Image src='/admin.png' alt="Users" width={48} height={48} />
                   </div>
                   <div className="text-green-500 text-sm font-medium bg-green-50 dark:bg-green-900/20 px-2 py-1 rounded-full">
                     +12%
@@ -149,7 +149,7 @@ export default function AdminDashboard() {
               <Card className="group p-10 hover:scale-105 transition-all duration-300 cursor-pointer border-0">
                 <div className="flex items-start justify-between mb-4">
                   <div className="p-3 rounded-xl transition-colors duration-300">
-                    <img src='./cv.png' alt="Resumes" className="w-12 h-12" />
+                    <Image src='/cv.png' alt="Resumes" width={48} height={48}/>
                   </div>
                   <div className="text-green-500 text-sm font-medium bg-green-50 dark:bg-green-900/20 px-2 py-1 rounded-full">
                     +8%
@@ -166,7 +166,7 @@ export default function AdminDashboard() {
               <Card className="group p-10 hover:scale-105 transition-all duration-300 cursor-pointer border-0">
                 <div className="flex items-start justify-between mb-4">
                   <div className="p-3 rounded-xl transition-colors duration-300">
-                    <img src='./score.png' alt="Score" className="w-12 h-12" />
+                    <Image src='/score.png' alt="Score" width={48} height={48} />
                   </div>
                   <div className="text-green-500 text-sm font-medium bg-green-50 dark:bg-green-900/20 px-2 py-1 rounded-full">
                     +5%
@@ -185,7 +185,7 @@ export default function AdminDashboard() {
             <Card className="p-6 border-0 overflow-hidden">
               <div className="flex items-center gap-3 mb-6">
                 <div className="p-2 bg-admin-purple/10 rounded-lg">
-                  <img src='./score.png' alt="Top Scores" className="w-5 h-5" />
+                  <Image src='/score.png' alt="Top Scores" width={48} height={48} />
                 </div>
                 <h2 className="text-xl font-semibold text-white">Top Resume Scores</h2>
               </div>
@@ -250,7 +250,7 @@ export default function AdminDashboard() {
                 </table>
                 {topScores.length === 0 && (
                   <div className="text-center py-12 text-white">
-                    <img src='./score.png' alt="No data" className="w-12 h-12 mx-auto mb-4 opacity-30" />
+                    <Image src='/score.png' alt="No data" width={48} height={48} className="mx-auto mb-4 opacity-30" />
                     <p>No top scores available</p>
                   </div>
                 )}
@@ -265,7 +265,7 @@ export default function AdminDashboard() {
               <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
                 <div className="flex items-center gap-3">
                   <div className="p-2 bg-admin-purple/10 rounded-lg">
-                    <img src='./admin.png' alt="Users" className="w-5 h-5" />
+                    <Image src='/admin.png' alt="Users" width={48} height={48}/>
                   </div>
                   <h2 className="text-xl font-semibold text-white">User Management</h2>
                 </div>
@@ -321,7 +321,7 @@ export default function AdminDashboard() {
                   </table>
                   {filteredUsers?.length === 0 && (
                     <div className="text-center py-12 text-white">
-                      <img src='./admin.png' alt="No users" className="w-12 h-12 mx-auto mb-4 opacity-30" />
+                      <Image src='/admin.png' alt="No users" width={48} height={48} className="mx-auto mb-4 opacity-30" />
                       <p>No users found matching your search</p>
                     </div>
                   )}
@@ -336,7 +336,7 @@ export default function AdminDashboard() {
             <div className="p-6 border-b border-border/50">
               <div className="flex items-center gap-3">
                 <div className="p-2 bg-admin-purple/10 rounded-lg">
-                  <img src='./cv.png' alt="Resumes" className="w-5 h-5" />
+                  <Image src='/cv.png' alt="Resumes" width={48} height={48} />
                 </div>
                 <h2 className="text-xl font-semibold text-white">Resume Analytics</h2>
               </div>
@@ -414,7 +414,7 @@ export default function AdminDashboard() {
                   </table>
                   {resumes?.length === 0 && (
                     <div className="text-center py-12 text-white">
-                      <img src='./cv.png' alt="No resumes" className="w-12 h-12 mx-auto mb-4 opacity-30" />
+                      <Image src='/cv.png' alt="No resumes" width={48} height={48} className="mx-auto mb-4 opacity-30" />
                       <p>No resumes found</p>
                     </div>
                   )}
@@ -441,7 +441,7 @@ export default function AdminDashboard() {
             
             <div className="flex items-center gap-3 mb-6">
               <div className="p-2 bg-[#8854e0]/10 rounded-lg">
-                <img src='./cv.png' alt="Skills" className="w-5 h-5" />
+                <Image src='/cv.png' alt="Skills" className="w-5 h-5" />
               </div>
               <div>
                 <h3 className="text-lg font-semibold text-white">All Skills</h3>

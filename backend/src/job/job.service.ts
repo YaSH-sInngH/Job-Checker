@@ -1,9 +1,14 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
+import { Repository, In } from 'typeorm';
 import { Job } from './job.entity';
 import axios from 'axios';
 import { ChromaClient } from 'chromadb';
+
+interface JobMetadata {
+  jobId: number;
+  title: string;
+}
 
 @Injectable()
 export class JobService {
@@ -74,8 +79,12 @@ export class JobService {
       nResults: topK,
       include: ['metadatas'],
     });
-    const jobIds = results.metadatas[0]?.map((meta: any) => meta.jobId) || [];
+    const jobIds = (results.metadatas[0] ?? [])
+      .filter((meta): meta is { jobId: number } =>
+        !!meta && typeof meta === 'object' && 'jobId' in meta && typeof (meta as any).jobId === 'number'
+      )
+      .map((meta) => meta.jobId);
     if (!jobIds.length) return [];
-    return this.jobRepo.findByIds(jobIds);
+    return this.jobRepo.find({ where: { id: In(jobIds) } });
   }
 }
