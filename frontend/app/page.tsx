@@ -33,16 +33,16 @@ export default function HomePage() {
             {[1, 2, 3].map((num, index) => (
               <React.Fragment key={num}>
                 <motion.div
-                  className="flex flex-col items-center"
+                  className="flex flex-col items-center p-4"
                   variants={{
                     hidden: { opacity: 0, y: 20 },
                     visible: { opacity: 1, y: 0, transition: { duration: 0.5 } },
                   }}
                 >
-                  <div className="w-12 h-12 rounded-full dark:bg-[#8854e0] text-white flex items-center justify-center text-2xl font-bold mb-2">
+                  <div className="w-16 h-16 rounded-full bg-[#8854e0] dark:bg-[#8854e0] text-black dark:text-white flex items-center justify-center text-4xl font-bold mb-3">
                     {num}
                   </div>
-                  <span className="font-medium text-black dark:text-white underline-offset-4 underline decoration-[#8854e0]">
+                  <span className="font-medium text-black dark:text-white underline-offset-4 underline decoration-[#8854e0] text-lg">
                     {num === 1
                       ? "Upload resume"
                       : num === 2
@@ -94,9 +94,15 @@ export default function HomePage() {
           <h2 className="text-3xl font-bold mb-8 text-center text-black dark:text-white">What our <span className='text-[#8854e0]'>users</span> say<span className='text-[#8854e0] p-1'>.</span></h2>
           <div className="grid md:grid-cols-3 gap-8">
             <Card>
-              <p className="text-lg italic mb-4 text-black dark:text-white">“Alora made my job search so much easier. The AI feedback was spot on!”</p>
+              <p className="text-lg italic mb-4 text-black dark:text-white">
+                “Alora made my job search so much easier. The AI feedback was spot on!”
+              </p>
               <div className="flex items-center gap-3">
-                <div className="w-10 h-10 rounded-full bg-gray-200" />
+                <img
+                  src="/profile1.jpg"
+                  alt="Alex P."
+                  className="w-10 h-10 rounded-full object-cover"
+                />
                 <div>
                   <div className="font-semibold text-[#8854e0]">Alex P.</div>
                   <div className="text-xs text-gray-500">Software Engineer</div>
@@ -104,9 +110,15 @@ export default function HomePage() {
               </div>
             </Card>
             <Card>
-              <p className="text-lg italic mb-4 text-black dark:text-white">“I loved how quickly I got matched to relevant jobs. Highly recommend!”</p>
+              <p className="text-lg italic mb-4 text-black dark:text-white">
+                “I loved how quickly I got matched to relevant jobs. Highly recommend!”
+              </p>
               <div className="flex items-center gap-3">
-                <div className="w-10 h-10 rounded-full bg-gray-200" />
+                <img
+                  src="/profile3.jpg"
+                  alt="Alex P."
+                  className="w-10 h-10 rounded-full object-cover"
+                />
                 <div>
                   <div className="font-semibold text-[#8854e0]">Maria G.</div>
                   <div className="text-xs text-gray-500">Product Manager</div>
@@ -114,9 +126,15 @@ export default function HomePage() {
               </div>
             </Card>
             <Card>
-              <p className="text-lg italic mb-4 text-black dark:text-white">“The resume score and improvement tips helped me land more interviews.”</p>
+              <p className="text-lg italic mb-4 text-black dark:text-white">
+                “I loved how quickly I got matched to relevant jobs. Highly recommend!”
+              </p>
               <div className="flex items-center gap-3">
-                <div className="w-10 h-10 rounded-full bg-gray-200" />
+                <img
+                  src="/profile2.jpg"
+                  alt="Alex P."
+                  className="w-10 h-10 rounded-full object-cover"
+                />
                 <div>
                   <div className="font-semibold text-[#8854e0]">Samir K.</div>
                   <div className="text-xs text-gray-500">Data Analyst</div>

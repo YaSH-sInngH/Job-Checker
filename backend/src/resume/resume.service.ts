@@ -178,7 +178,7 @@ export class ResumeService {
     const embedding = embeddingResp.data.embeddings[0];
 
     // 3. Query ChromaDB for similar jobs
-    const chroma = new ChromaClient();
+    const chroma = new ChromaClient({ path: 'http://localhost:8000' });
     const identityEmbeddingFunction = {
       generate: async (_texts: string[]) => {
         throw new Error('Should not be called, as you provide embeddings directly.');

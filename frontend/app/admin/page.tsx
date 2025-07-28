@@ -209,9 +209,9 @@ export default function AdminDashboard() {
             </div>
 
             {/* Enhanced Top Scores Table */}
-            <Card className="p-6 border-0 overflow-hidden">
+            <div className="p-6 border-0 overflow-hidden bg-[#8854e0]/20">
               <div className="flex items-center gap-3 mb-6">
-                <div className="p-2 bg-admin-purple/10 rounded-lg">
+                <div className="p-2 bg-[#8854e0]/10 rounded-lg">
                   <Image src='/score.png' alt="Top Scores" width={48} height={48} />
                 </div>
                 <h2 className="text-xl font-semibold text-white">Top Resume Scores</h2>
@@ -260,7 +260,7 @@ export default function AdminDashboard() {
                                 ))}
                                 {skillsArr.length > showCount && (
                                   <button
-                                    className="inline-flex items-center px-2 py-1 rounded-md bg-admin-purple text-white text-xs font-medium hover:bg-admin-purple-hover transition-colors duration-200 underline"
+                                    className="inline-flex items-center px-2 py-1 rounded-md bg-[#8854e0] text-white text-xs font-medium hover:bg-[#8854e0]/30 transition-colors duration-200"
                                     onClick={() => { setModalSkills(skillsArr); setModalResume(item); }}
                                     type="button"
                                   >
@@ -282,16 +282,16 @@ export default function AdminDashboard() {
                   </div>
                 )}
               </div>
-            </Card>
+            </div>
           </>
         )}
 
         {activeTab === "Users" && (
-          <Card className="border-0">
+          <div className="border-0 bg-[#8854e0]/20">
             <div className="p-6 border-b border-border/50">
               <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
                 <div className="flex items-center gap-3">
-                  <div className="p-2 bg-admin-purple/10 rounded-lg">
+                  <div className="p-2 bg-[#8854e0]/10 rounded-lg">
                     <Image src='/admin.png' alt="Users" width={48} height={48}/>
                   </div>
                   <h2 className="text-xl font-semibold text-white">User Management</h2>
@@ -302,7 +302,7 @@ export default function AdminDashboard() {
                     placeholder="Search users..."
                     value={userSearch}
                     onChange={e => setUserSearch(e.target.value)}
-                    className="w-full md:w-80 px-4 py-2 pl-10 rounded-lg border border-border bg-[#1a1f1b] text-white text-sm focus:outline-none focus:ring-2 focus:ring-admin-purple/20 focus:border-admin-purple transition-all duration-200"
+                    className="w-full md:w-80 px-4 py-2 pl-10 rounded-lg border border-border bg-[#1a1f1b] text-white text-sm focus:outline-none focus:ring-2 focus:ring-[#8854e0]/20 focus:border-[#8854e0] transition-all duration-200"
                   />
                   <div className="absolute left-3 top-1/2 -translate-y-1/2 text-white">
                     <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -355,14 +355,14 @@ export default function AdminDashboard() {
                 </div>
               )}
             </div>
-          </Card>
+          </div>
         )}
 
         {activeTab === "Resumes" && (
-          <Card className="border-0">
+          <div className="border-0 bg-[#8854e0]/20">
             <div className="p-6 border-b border-border/50">
               <div className="flex items-center gap-3">
-                <div className="p-2 bg-admin-purple/10 rounded-lg">
+                <div className="p-2 bg-[#8854e0]/10 rounded-lg">
                   <Image src='/cv.png' alt="Resumes" width={48} height={48} />
                 </div>
                 <h2 className="text-xl font-semibold text-white">Resume Analytics</h2>
@@ -448,14 +448,14 @@ export default function AdminDashboard() {
                 </div>
               )}
             </div>
-          </Card>
+          </div>
         )}
       </div>
 
       {/* Enhanced Modal */}
       {modalSkills && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm p-4">
-          <div className="bg-admin-card rounded-2xl shadow-2xl p-8 max-w-lg w-full relative animate-in zoom-in-95 duration-300">
+          <div className="bg-[#8854e0]/50 rounded-2xl shadow-2xl p-8 max-w-lg w-full relative animate-in zoom-in-95 duration-300">
             <button
               className="absolute top-4 right-4 w-8 h-8 flex items-center justify-center rounded-full text-white hover:text-white hover:bg-[#8854e0]/50 transition-all duration-200"
               onClick={closeModal}
@@ -468,7 +468,7 @@ export default function AdminDashboard() {
             
             <div className="flex items-center gap-3 mb-6">
               <div className="p-2 bg-[#8854e0]/10 rounded-lg">
-                <Image src='/cv.png' alt="Skills" className="w-5 h-5" />
+                <Image src='/cv.png' alt="Skills" width={24} height={24} />
               </div>
               <div>
                 <h3 className="text-lg font-semibold text-white">All Skills</h3>

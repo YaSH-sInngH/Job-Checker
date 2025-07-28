@@ -62,75 +62,75 @@ export default function ResumeDetailPage() {
   const { resume, analysis } = data;
 
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-[#1a1f1b] flex flex-col items-center px-4 py-10">
+    <div className="min-h-screen bg-gray-50 dark:bg-[#1a1f1b] flex flex-col items-center px-2 sm:px-4 py-6 sm:py-10">
       <div className="w-full max-w-3xl">
-        <Link href="/dashboard" className="text-white hover:underline underline-offset-4 decoration-[#8854e0] mb-4 inline-block py-6">&larr; Back to Dashboard</Link>
-        <div className="text-2xl font-semibold mb-3 text-gray-900 dark:text-white underline underline-offset-4 decoration-[#8854e0]">
+        <Link href="/dashboard" className="text-white hover:underline underline-offset-4 decoration-[#8854e0] mb-3 sm:mb-4 inline-block py-3 sm:py-6 text-sm sm:text-base">&larr; Back to Dashboard</Link>
+        <div className="text-xl sm:text-2xl font-semibold mb-3 text-gray-900 dark:text-white underline underline-offset-4 decoration-[#8854e0]">
           Your <span className="text-[#8854e0]">Resume</span>
         </div>
         
-        <div className="mb-8">
-          <h1 className="text-2xl font-bold mb-2 text-gray-900 dark:text-white">{resume.originalname}</h1>
-          <div className="flex flex-wrap gap-4 items-center mb-4">
+        <div className="mb-6 sm:mb-8">
+          <h1 className="text-lg sm:text-2xl font-bold mb-2 text-gray-900 dark:text-white break-words">{resume.originalname}</h1>
+          <div className="flex flex-col sm:flex-row sm:flex-wrap gap-2 sm:gap-4 items-start sm:items-center mb-4">
             {analysis && <AIScore score={analysis.score} />}
             <span className="text-xs text-gray-500">Uploaded: {new Date(resume.createdAt).toLocaleDateString()}</span>
           </div>
           {analysis && analysis.skills && (
-            <div className="flex flex-wrap gap-2 mb-4">
+            <div className="flex flex-wrap gap-1 sm:gap-2 mb-4">
               <SkillTags skills={analysis.skills.split(/,|\n/).map((s: string) => s.trim()).filter(Boolean)} />
             </div>
           )}
           {analysis && (
             <div className="mb-4">
-              <h2 className="font-semibold mb-1 text-gray-900 dark:text-white">Improvement Suggestions:</h2>
-              <ul className="list-disc list-inside text-gray-700 dark:text-gray-300">
+              <h2 className="font-semibold mb-1 text-gray-900 dark:text-white text-sm sm:text-base">Improvement Suggestions:</h2>
+              <ul className="list-disc list-inside text-gray-700 dark:text-gray-300 text-sm sm:text-base space-y-1">
                 {analysis.suggestions
                   .split(/\n|\r/)
                   .map((tip: string) => tip.replace(/^[-•]\s*/, '').trim())
                   .filter((tip: string) => tip && !/^(for Improvement:|\d+\.?)$/i.test(tip))
                   .map((tip: string, i: number) => (
-                    <li key={i}>{tip}</li>
+                    <li key={i} className="break-words">{tip}</li>
                   ))}
               </ul>
               {analysis.scoreExplanation && (
-                <div className="mt-4 p-4 rounded bg-primary-50 dark:bg-gray-800 text-gray-800 dark:text-gray-200 text-sm">
+                <div className="mt-4 p-3 sm:p-4 rounded bg-primary-50 dark:bg-gray-800 text-gray-800 dark:text-gray-200 text-xs sm:text-sm">
                   {analysis.scoreExplanation}
                 </div>
               )}
             </div>
           )}
           <div className="mb-4">
-            <h2 className="font-semibold mb-1 text-gray-900 dark:text-white">Parsed Resume Text:</h2>
-            <div className="bg-gray-100 dark:bg-[#8854e0]/40 rounded p-3 text-sm text-gray-800 dark:text-gray-200 max-h-60 overflow-y-auto whitespace-pre-line">
+            <h2 className="font-semibold mb-1 text-gray-900 dark:text-white text-sm sm:text-base">Parsed Resume Text:</h2>
+            <div className="bg-gray-100 dark:bg-[#8854e0]/40 rounded p-2 sm:p-3 text-xs sm:text-sm text-gray-800 dark:text-gray-200 max-h-48 sm:max-h-60 overflow-y-auto whitespace-pre-line">
               {resume.text}
             </div>
           </div>
         </div>
-        <div className="mt-10">
-          <h2 className="text-2xl font-semibold mb-3 text-gray-900 dark:text-white underline underline-offset-4 decoration-[#8854e0]">Matched <span className="text-[#8854e0]">Jobs</span></h2>
+        <div className="mt-8 sm:mt-10">
+          <h2 className="text-xl sm:text-2xl font-semibold mb-3 text-gray-900 dark:text-white underline underline-offset-4 decoration-[#8854e0]">Matched <span className="text-[#8854e0]">Jobs</span></h2>
           {matchesLoading ? (
-            <div className="flex items-center gap-2 text-primary-500"><LoadingSpinner size={20} /> Loading matches...</div>
+            <div className="flex items-center gap-2 text-primary-500 text-sm sm:text-base"><LoadingSpinner size={20} /> Loading matches...</div>
           ) : matches && matches.length > 0 ? (
             <ul className="space-y-3">
               {matches.map((job: Job, i: number) => (
-                <li key={i} className="p-3 rounded-lg bg-[#8854e0]/20 dark:bg-[#8854e0]/30">
-                  <div className="font-semibold text-white">{job.title || job.jobTitle || 'Job Match'}</div>
-                  {job.company && <div className="text-base text-[#8854e0]">{job.company}</div>}
+                <li key={i} className="p-3 sm:p-4 rounded-lg bg-[#8854e0]/20 dark:bg-[#8854e0]/30">
+                  <div className="font-semibold text-white text-sm sm:text-base break-words">{job.title || job.jobTitle || 'Job Match'}</div>
+                  {job.company && <div className="text-sm sm:text-base text-[#8854e0] break-words">{job.company}</div>}
                   {job.skills && (
-                    <div className="flex gap-2 mt-2">
+                    <div className="flex flex-wrap gap-1 sm:gap-2 mt-2">
                       {job.skills.split(/,|\n/).map((skill: string, j: number) => (
-                        <span key={j} className="px-2 py-1 rounded bg-black/50 text-[#8854e0] text-xs">{skill.trim()}</span>
+                        <span key={j} className="px-2 py-1 rounded bg-black/50 text-[#8854e0] text-xs break-words">{skill.trim()}</span>
                       ))}
                     </div>
                   )}
                   {job.description && (
-                    <div className="mt-2 text-xs text-gray-700 dark:text-gray-300 line-clamp-3">{job.description}</div>
+                    <div className="mt-2 text-xs sm:text-sm text-gray-700 dark:text-gray-300 line-clamp-3 break-words">{job.description}</div>
                   )}
                 </li>
               ))}
             </ul>
           ) : (
-            <div className="text-gray-500">No matched jobs found.</div>
+            <div className="text-gray-500 text-sm sm:text-base">No matched jobs found.</div>
           )}
         </div>
       </div>

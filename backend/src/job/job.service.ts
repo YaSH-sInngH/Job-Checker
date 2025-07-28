@@ -72,7 +72,7 @@ export class JobService {
   }
 
   async searchJobs(queryEmbedding: number[], topK = 5): Promise<Job[]> {
-    const chroma = new ChromaClient();
+    const chroma = new ChromaClient({ path: 'http://localhost:8000' });
     const collection = await chroma.getOrCreateCollection({ name: 'jobs' });
     const results = await collection.query({
       queryEmbeddings: [queryEmbedding],

@@ -64,8 +64,8 @@ export default function SignupPage() {
         {errors.password && <p className="text-red-500 text-xs">{errors.password.message}</p>}
         {/* Optionally, allow role selection for future admin use, but only 'user' for now */}
         <input type="hidden" value="user" {...register('role')} />
-        <Button type="submit" className="w-full" disabled={loading}>
-          {loading ? <LoadingSpinner size={20} /> : 'Sign Up'}
+        <Button type="submit" className="w-full flex items-center justify-center hover:bg-[#8854e0]/80" disabled={loading}>
+          {loading ? <LoadingSpinner size={20} className='text-white'/> : 'Sign Up'}
         </Button>
         <p className="text-sm text-center mt-2">
           Already have an account ? <a href="/login" className="text-[#8854e0] hover:underline">Login</a>

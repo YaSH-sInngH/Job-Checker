@@ -70,8 +70,8 @@ export default function LoginPage() {
         {errors.email && <p className="text-red-500 text-xs">{errors.email.message}</p>}
         <Input label="Password" type="password" {...register('password')} />
         {errors.password && <p className="text-red-500 text-xs">{errors.password.message}</p>}
-        <Button type="submit" className="w-full" disabled={loading}>
-          {loading ? <LoadingSpinner size={20} /> : 'Login'}
+        <Button type="submit" className="w-full flex items-center justify-center hover:bg-[#8854e0]/80" disabled={loading}>
+          {loading ? <LoadingSpinner size={20} className=' text-center text-white' /> : 'Login'}
         </Button>
         <div className="flex justify-between">
             <p className="text-sm text-center mt-2">
